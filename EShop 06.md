@@ -136,7 +136,28 @@ public async Task<Result<IEnumerable<Product>>> Get()
 Теперь мы можем в вызывающем коде по признаку Result: Fail или Ok понять, штатно ли всё отработало или были проблемы. Теперь без проброса исключения в вызывающий код, мы можем корректно обработать неуспешное выполнение.  
 Перейдем в вызывающий код - он находится в `ProductHandler`.  
 В этом слое не будем ничего меня - просто пробросим Result дальше в Presentation слой.
-Для этого придется поправить сигнатуры и добавить  `using FluentResults;`  
+Для этого придется поправить сигнатуры, добавить  `using FluentResults;` и немного переписать `GetById`
+В `GetById` 
+- если в репозитории метод выполнился неуспешно - пробрасываем его выше.  
+- если в репозитории метод выполнился успешно - то нам нужно обработать результат, т.к. у нас теперь возвращается не коллекция Product, а коллекция завернутая в Result - обратимся к полезной нагрузке этого Result, данные в резалт хранятся в свойстве Value. 
+```csharp
+public async Task<Result<IEnumerable<Product>>> GetById(int? id)
+{
+    var listOfProducts = new List<Product>();
+    var productsResult = await _productRepository.Get();
+    if (productsResult.IsFailed)
+        return productsResult;
 
 
+    foreach (var product in productsResult.Value) {
+        if (product.Id == id)
+        {
+            listOfProducts.Add(product);
+            return listOfProducts;
+        }
+    }
+    return listOfProducts;
+}
+```
 
+![](attachments/Pasted%20image%2020250207154734.png)
