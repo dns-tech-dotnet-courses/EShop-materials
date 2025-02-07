@@ -117,3 +117,5 @@ catch (Exception ex)
 ## FluentResult
 В dotnet существует пакет https://github.com/altmann/FluentResults который является реализацией паттерна Result
 Подключим его и посмотрим как можно работать с ошибками с его помощью
+![](attachments/Pasted%20image%2020250207135435.png)  
+![](attachments/Pasted%20image%2020250207135403.png)  
