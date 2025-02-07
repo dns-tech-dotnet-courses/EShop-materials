@@ -53,6 +53,9 @@ public async Task<string> GetDataAsync()
 ![](attachments/Pasted%20image%2020250204233341.png)  
 [INFO IO-bound операции](INFO/IO-bound.md)  
 Поправим и `DbProductRepository`  
+Изменим сигнатуру метода `Get`
+Заменим вызовы `npsql` на асинхронные  
+
 
 Теперь нужно поправить вызовы методов репозитория  
 ![](attachments/Pasted%20image%2020250204234003.png)  
