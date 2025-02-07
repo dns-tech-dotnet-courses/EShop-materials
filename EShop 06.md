@@ -116,6 +116,7 @@ catch (Exception ex)
 [INFO Pattern Result](INFO/Pattern%20Result.md)
 ## FluentResult
 В dotnet существует пакет https://github.com/altmann/FluentResults который является реализацией паттерна Result
-Подключим его и посмотрим как можно работать с ошибками с его помощью
+Подключим пакет во все наши сборки  
+И посмотрим как можно работать с ошибками с его помощью
 ![](attachments/Pasted%20image%2020250207135435.png)  
 ![](attachments/Pasted%20image%2020250207135403.png)  
