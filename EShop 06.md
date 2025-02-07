@@ -148,7 +148,6 @@ public async Task<Result<IEnumerable<Product>>> GetById(int? id)
     if (productsResult.IsFailed)
         return productsResult;
 
-
     foreach (var product in productsResult.Value) {
         if (product.Id == id)
         {
@@ -156,8 +155,9 @@ public async Task<Result<IEnumerable<Product>>> GetById(int? id)
             return listOfProducts;
         }
     }
-    return listOfProducts;
+    return Result.Ok<IEnumerable<Product>>(listOfProducts);
 }
 ```
-
-![](attachments/Pasted%20image%2020250207154734.png)
+![](attachments/Pasted%20image%2020250207155134.png)Теперь перейдем в `EShop.Presentation\Controllers\ProductsController.cs`  
+На этом уровне мы отдаем результат во внешний мир и вернуть Result не получится, здесь понадобится что-то более общеупотребимое.
+Традиционно в веб-разработке для решения подобных проблем используются коды ответов сервера.  
